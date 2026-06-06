@@ -1,0 +1,285 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Employee Check-In{% endblock %}
+
+{% block page_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Check-In/Check-Out</h2>
+                </div>
+                <div class="card-body">
+                    <form id="checkin-form">
+                        <div class="mb-3">
+                            <label for="employee" class="form-label">Employee</label>
+                            <input type="text" class="form-control" id="employee" placeholder="Select Employee" readonly>
+                            <small class="text-muted">Logged in user information</small>
+                        </div>
+
+                        <div class="mb-3" id="company-group" style="display: none;">
+                            <label for="company" class="form-label">Company</label>
+                            <select class="form-select" id="company">
+                                <option value="">Select Company</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sector" class="form-label">Sector</label>
+                            <input type="text" class="form-control" id="sector" placeholder="e.g., IT, Sales">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Notes</label>
+                            <textarea class="form-control" id="notes" rows="3" placeholder="Optional notes about your location or status"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gps-enabled">
+                                <label class="form-check-label" for="gps-enabled">
+                                    Enable GPS Location (optional)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="gps-info" class="alert alert-info" style="display: none;">
+                            <small>
+                                <strong>GPS Location:</strong><br>
+                                Latitude: <span id="latitude">--</span><br>
+                                Longitude: <span id="longitude">--</span><br>
+                                Accuracy: <span id="accuracy">--</span>m
+                            </small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg" id="checkin-btn">
+                                <i class="fa fa-sign-in"></i> Check In
+                            </button>
+                            <button type="button" class="btn btn-warning btn-lg" id="checkout-btn">
+                                <i class="fa fa-sign-out"></i> Check Out
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="status-message" class="alert mt-3" style="display: none;"></div>
+            <div id="month-history" class="mt-4" style="display: none;">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Current Month Attendance</h5>
+                    </div>
+                    <div class="card-body">
+                        <p id="month-summary" class="mb-3"></p>
+                        <div id="month-history-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const employeeField = document.getElementById('employee');
+    const companyField = document.getElementById('company');
+    const sectorField = document.getElementById('sector');
+    const gpsInfo = document.getElementById('gps-info');
+    const checkinBtn = document.getElementById('checkin-btn');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const companyGroup = document.getElementById('company-group');
+    const monthHistory = document.getElementById('month-history');
+    const monthSummary = document.getElementById('month-summary');
+    const monthHistoryList = document.getElementById('month-history-list');
+
+    function setButtonStates(checkedIn) {
+        checkinBtn.disabled = checkedIn;
+        checkoutBtn.disabled = !checkedIn;
+    }
+
+    function updateDashboard(data) {
+        if (!data) {
+            return;
+        }
+
+        if (data.status === 'error') {
+            showStatus(data.message || 'Please login to use the check-in portal.', 'warning');
+            setButtonStates(false);
+            employeeField.value = 'Guest';
+            showCompanyField(false);
+            renderMonthHistory([]);
+            return;
+        }
+
+        employeeField.value = data.employee_name || 'Guest';
+
+        if (data.company) {
+            companyField.innerHTML = `<option value="${data.company}">${data.company}</option>`;
+            companyField.value = data.company;
+            showCompanyField(true);
+        }
+
+        sectorField.value = data.department || '';
+        setButtonStates(data.checked_in);
+        renderMonthHistory(data.month_check_ins || []);
+
+        if (data.checked_in) {
+            showStatus('Attendance success. Current session ID: ' + data.current_check_in_id, 'success');
+        }
+    }
+
+    function loadDashboard() {
+        frappe.call({
+            method: 'insight_nexus.insight_nexus.api.check_in.get_dashboard',
+            callback: function(r) {
+                if (r.message) {
+                    updateDashboard(r.message);
+                }
+            },
+            error: function() {
+                showStatus('Please login or refresh the page to use the check-in portal.', 'warning');
+                setButtonStates(false);
+            }
+        });
+    }
+
+    function getGPSLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById('latitude').textContent = position.coords.latitude.toFixed(6);
+                document.getElementById('longitude').textContent = position.coords.longitude.toFixed(6);
+                document.getElementById('accuracy').textContent = position.coords.accuracy.toFixed(0);
+            }, function(error) {
+                showStatus('GPS Error: ' + error.message, 'danger');
+            });
+        }
+    }
+
+    function showStatus(message, type) {
+        let statusDiv = document.getElementById('status-message');
+        statusDiv.className = 'alert alert-' + type;
+        statusDiv.textContent = message;
+        statusDiv.style.display = 'block';
+    }
+
+    function renderMonthHistory(checkins) {
+        if (!checkins || !checkins.length) {
+            monthHistory.style.display = 'none';
+            monthHistoryList.innerHTML = '';
+            monthSummary.textContent = '';
+            return;
+        }
+
+        monthHistory.style.display = 'block';
+        monthSummary.textContent = `This month you have ${checkins.length} check-in records.`;
+        monthHistoryList.innerHTML = checkins.map(checkin => {
+            const outTime = checkin.check_out_time || 'Still checked in';
+            return `
+                <div class="border rounded p-2 mb-2">
+                    <strong>${checkin.check_in_time}</strong><br>
+                    ${outTime}<br>
+                    Duration: ${checkin.duration_minutes || 0} minutes
+                </div>
+            `;
+        }).join('');
+    }
+
+    function showCompanyField(show) {
+        companyGroup.style.display = show ? 'block' : 'none';
+    }
+
+    function refreshUI() {
+        document.getElementById('checkin-form').reset();
+        showCompanyField(false);
+        if (document.getElementById('gps-enabled').checked) {
+            getGPSLocation();
+        }
+        loadDashboard();
+    }
+
+    document.getElementById('gps-enabled').addEventListener('change', function() {
+        if (this.checked) {
+            gpsInfo.style.display = 'block';
+            getGPSLocation();
+        } else {
+            gpsInfo.style.display = 'none';
+        }
+    });
+
+    document.getElementById('checkin-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        performCheckIn();
+    });
+
+    document.getElementById('checkout-btn').addEventListener('click', function() {
+        performCheckOut();
+    });
+
+    function performCheckIn() {
+        frappe.call({
+            method: 'insight_nexus.insight_nexus.api.check_in.check_in',
+            args: {
+                latitude: document.getElementById('latitude').textContent === '--' ? null : document.getElementById('latitude').textContent,
+                longitude: document.getElementById('longitude').textContent === '--' ? null : document.getElementById('longitude').textContent,
+                accuracy: document.getElementById('accuracy').textContent === '--' ? null : document.getElementById('accuracy').textContent,
+                notes: document.getElementById('notes').value
+            },
+            callback: function(r) {
+                if (r.message) {
+                    if (r.message.status === 'success') {
+                        showStatus('✓ Check-In Successful at ' + new Date().toLocaleTimeString(), 'success');
+                        refreshUI();
+                    } else {
+                        showStatus('✗ ' + r.message.message, 'danger');
+                    }
+                }
+            }
+        });
+    }
+
+    function performCheckOut() {
+        frappe.call({
+            method: 'insight_nexus.insight_nexus.api.check_in.check_out',
+            args: {
+                notes: document.getElementById('notes').value
+            },
+            callback: function(r) {
+                if (r.message) {
+                    if (r.message.status === 'success') {
+                        showStatus('✓ Check-Out Successful at ' + new Date().toLocaleTimeString(), 'success');
+                        refreshUI();
+                    } else {
+                        showStatus('✗ ' + r.message.message, 'danger');
+                    }
+                }
+            }
+        });
+    }
+
+    loadDashboard();
+    if (document.getElementById('gps-enabled').checked) {
+        gpsInfo.style.display = 'block';
+        getGPSLocation();
+    }
+});
+</script>
+
+<style>
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.btn-lg {
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.gps-info {
+    font-size: 12px;
+}
+</style>
+{% endblock %}

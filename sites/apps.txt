@@ -1,0 +1,14 @@
+frappe
+erpnext
+ecommerce_integrations
+payments
+helpdesk
+builder
+crm
+hrms
+drive
+erpnext_ksa
+telephony
+insight_nexus
+umrah_management
+

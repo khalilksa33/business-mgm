@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:NEXUS-{YY}-{MM}-{DD}-{##### auto}",
+ "creation": "2026-05-05 12:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "company",
+  "sector",
+  "check_in_time",
+  "check_out_time",
+  "duration_minutes",
+  "section_gps",
+  "latitude",
+  "longitude",
+  "accuracy_meters",
+  "device_info",
+  "section_erp",
+  "erp_attendance_id",
+  "erp_checkin_id",
+  "sync_status",
+  "section_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sector",
+   "fieldtype": "Data",
+   "label": "Sector"
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Datetime",
+   "label": "Check-In Time",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Datetime",
+   "label": "Check-Out Time"
+  },
+  {
+   "fieldname": "duration_minutes",
+   "fieldtype": "Int",
+   "label": "Duration (Minutes)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_gps",
+   "fieldtype": "Section Break",
+   "label": "GPS Information"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "accuracy_meters",
+   "fieldtype": "Int",
+   "label": "Accuracy (Meters)"
+  },
+  {
+   "fieldname": "device_info",
+   "fieldtype": "Text",
+   "label": "Device Info"
+  },
+  {
+   "fieldname": "section_erp",
+   "fieldtype": "Section Break",
+   "label": "ERP Sync"
+  },
+  {
+   "fieldname": "erp_attendance_id",
+   "fieldtype": "Data",
+   "label": "ERP Attendance ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "erp_checkin_id",
+   "fieldtype": "Data",
+   "label": "ERP Checkin ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sync_status",
+   "fieldtype": "Select",
+   "label": "Sync Status",
+   "options": "Pending\nSynced\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "modified": "2026-05-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Insight Nexus",
+ "name": "Nexus Check-In",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "submit": 0,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Employee",
+   "submit": 0,
+   "write": 0
+  }
+ ],
+ "quick_entry": 0,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

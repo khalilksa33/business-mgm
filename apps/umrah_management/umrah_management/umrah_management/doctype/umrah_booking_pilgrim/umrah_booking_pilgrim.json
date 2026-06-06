@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-05-23 17:55:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pilgrim",
+  "first_name",
+  "last_name",
+  "passport_number",
+  "visa_status",
+  "column_break_logistics",
+  "bus_no",
+  "seat_no",
+  "makkah_room_no",
+  "madinah_room_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "pilgrim",
+   "fieldtype": "Link",
+   "label": "Pilgrim",
+   "options": "Umrah Pilgrim",
+   "reqd": 1
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "passport_number",
+   "fieldtype": "Data",
+   "label": "Passport Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visa_status",
+   "fieldtype": "Select",
+   "label": "Visa Status",
+   "options": "Not Applied\nApplied\nIssued\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_logistics",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bus_no",
+   "fieldtype": "Data",
+   "label": "Bus No"
+  },
+  {
+   "fieldname": "seat_no",
+   "fieldtype": "Data",
+   "label": "Seat No"
+  },
+  {
+   "fieldname": "makkah_room_no",
+   "fieldtype": "Data",
+   "label": "Makkah Room No"
+  },
+  {
+   "fieldname": "madinah_room_no",
+   "fieldtype": "Data",
+   "label": "Madinah Room No"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2026-05-23 17:55:00.000000",
+ "modified_by": "Administrator",
+ "module": "Umrah Management",
+ "name": "Umrah Booking Pilgrim",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

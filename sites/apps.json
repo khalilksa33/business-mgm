@@ -1,0 +1,111 @@
+{
+    "frappe": {
+        "resolution": {
+            "commit_hash": null,
+            "branch": null
+        },
+        "required": [],
+        "idx": 1,
+        "version": "15.103.0"
+    },
+    "erpnext": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "1d14ba16398db3a220873509565c60f2932bed81",
+            "branch": "version-15"
+        },
+        "required": [],
+        "idx": 2,
+        "version": "15.102.0"
+    },
+    "hrms": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "d87e66a348b350a22a53d47c8ad83afce394757c",
+            "branch": "version-15"
+        },
+        "required": [],
+        "idx": 3,
+        "version": "15.58.4"
+    },
+    "crm": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "6fe1455366866d51f3bc1d15cb36b6a4350fd392",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 4,
+        "version": "2.0.0-dev"
+    },
+    "telephony": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "d4ee5b44b52e2fc5ab19b8177d8865df879cb764",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 7,
+        "version": "0.0.1"
+    },
+    "builder": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "476dbf1ec0c7d6e3ff45625d7a91cb8cb877de29",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 6,
+        "version": "1.0.0-dev"
+    },
+    "helpdesk": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "21bc3aaef1b77a0a2af0331c695921723f425702",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 7,
+        "version": "1.21.3"
+    },
+    "drive": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "23ef270c171371688b11281739aa16164610abcd",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 8,
+        "version": "0.3.0"
+    },
+    "erpnext_ksa": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "fe0f903338aa7d389e5e34d2012412cb563c8cac",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 9,
+        "version": "0.0.1"
+    },
+    "payments": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "3cebd9425e414e4c3419a374c616727c5d94b5ea",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 10,
+        "version": "0.0.1"
+    },
+    "ecommerce_integrations": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "ba8ac5055fd68a095c6861d72faaa7b24a90a939",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 11,
+        "version": "1.17.0"
+    }
+}

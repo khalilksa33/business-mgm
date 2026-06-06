@@ -1,0 +1,138 @@
+/* Global Umrah Management Styling & Dark Theme support */
+
+:root {
+    --umrah-bg-header: #ffffff;
+    --umrah-bg-body: #f8f9fa;
+    --umrah-bg-card: #ffffff;
+    --umrah-text-main: #1a1a1a;
+    --umrah-text-muted: #6c757d;
+    --umrah-border-color: #dee2e6;
+    --umrah-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Apply variables to the document */
+body.theme-light {
+    background-color: var(--umrah-bg-body);
+    color: var(--umrah-text-main);
+}
+
+body.theme-dark {
+    --umrah-bg-header: #121212;
+    --umrah-bg-body: #1a1a1a;
+    --umrah-bg-card: #242424;
+    --umrah-text-main: #f8f9fa;
+    --umrah-text-muted: #a0a0a0;
+    --umrah-border-color: #333333;
+    --umrah-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    
+    background-color: var(--umrah-bg-body) !important;
+    color: var(--umrah-text-main) !important;
+}
+
+/* Dark Mode Overrides for Default Layout */
+body.theme-dark .navbar {
+    background-color: var(--umrah-bg-header) !important;
+    border-bottom: 1px solid var(--umrah-border-color) !important;
+}
+
+body.theme-dark .navbar-brand,
+body.theme-dark .navbar-nav .nav-link,
+body.theme-dark .navbar-collapse .nav-link {
+    color: var(--umrah-text-main) !important;
+}
+
+body.theme-dark .navbar-brand:hover,
+body.theme-dark .navbar-nav .nav-link:hover {
+    color: #ff4d62 !important;
+}
+
+body.theme-dark footer,
+body.theme-dark .web-footer {
+    background-color: var(--umrah-bg-header) !important;
+    border-top: 1px solid var(--umrah-border-color) !important;
+    color: var(--umrah-text-muted) !important;
+}
+
+body.theme-dark footer a,
+body.theme-dark .web-footer a {
+    color: var(--umrah-text-main) !important;
+}
+
+/* Dropdown styling in Dark Mode */
+body.theme-dark .dropdown-menu {
+    background-color: var(--umrah-bg-card) !important;
+    border-color: var(--umrah-border-color) !important;
+    color: var(--umrah-text-main) !important;
+}
+
+body.theme-dark .dropdown-item {
+    color: var(--umrah-text-main) !important;
+}
+
+body.theme-dark .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #ff4d62 !important;
+}
+
+/* Card Styling support for packages */
+body.theme-dark .card {
+    background-color: var(--umrah-bg-card) !important;
+    border-color: var(--umrah-border-color) !important;
+    color: var(--umrah-text-main) !important;
+    box-shadow: var(--umrah-card-shadow) !important;
+}
+
+body.theme-dark .card-title,
+body.theme-dark .card-subtitle,
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3,
+body.theme-dark h4,
+body.theme-dark h5,
+body.theme-dark h6 {
+    color: var(--umrah-text-main) !important;
+}
+
+body.theme-dark .text-muted,
+body.theme-dark .text-secondary {
+    color: var(--umrah-text-muted) !important;
+}
+
+body.theme-dark .bg-light,
+body.theme-dark .bg-soft-gray {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Custom layout selector margins and styling */
+.umrah-nav-control {
+    margin-left: 10px;
+    align-self: center;
+}
+
+[dir="rtl"] .umrah-nav-control {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.theme-toggle-btn-nav {
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn-nav:hover {
+    transform: scale(1.15);
+}
+
+/* Form and inputs dark styling */
+body.theme-dark input.form-control,
+body.theme-dark select.form-control,
+body.theme-dark textarea.form-control {
+    background-color: var(--umrah-bg-card) !important;
+    border-color: var(--umrah-border-color) !important;
+    color: var(--umrah-text-main) !important;
+}
+
+body.theme-dark input.form-control::placeholder {
+    color: var(--umrah-text-muted) !important;
+}

@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:partner_name",
+ "creation": "2026-05-24 14:30:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "partner_name",
+  "company",
+  "sector",
+  "location",
+  "section_break_details",
+  "business_activities",
+  "contact_person",
+  "designation",
+  "phone_1",
+  "phone_2",
+  "email_1",
+  "email_2",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "partner_name",
+   "fieldtype": "Data",
+   "label": "Partner Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sector",
+   "fieldtype": "Data",
+   "label": "Sector"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location / Address"
+  },
+  {
+   "fieldname": "section_break_details",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "business_activities",
+   "fieldtype": "Small Text",
+   "label": "Business Activities"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "phone_1",
+   "fieldtype": "Phone",
+   "label": "Phone 1"
+  },
+  {
+   "fieldname": "phone_2",
+   "fieldtype": "Phone",
+   "label": "Phone 2"
+  },
+  {
+   "fieldname": "email_1",
+   "fieldtype": "Data",
+   "label": "Email 1",
+   "options": "Email"
+  },
+  {
+   "fieldname": "email_2",
+   "fieldtype": "Data",
+   "label": "Email 2",
+   "options": "Email"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2026-05-24 15:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Insight Nexus",
+ "name": "JV Partner",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

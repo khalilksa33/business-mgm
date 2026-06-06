@@ -1,0 +1,209 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div id="umrah-portal">
+    <!-- Hero Section -->
+    <section class="portal-hero text-center d-flex align-items-center justify-content-center">
+        <div class="container hero-content py-5">
+            <h1 class="display-3 fw-bold mb-3 hero-title" data-translate="hero_title">Divine Journey of a Lifetime</h1>
+            <p class="lead mb-4 hero-subtitle" data-translate="hero_subtitle">Experience peaceful pilgrimage with IICC's trusted and premium Umrah packages.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#packages-section" class="btn btn-primary-custom btn-lg px-4 py-3 rounded-pill" data-translate="view_packages">Explore Packages</a>
+                <a href="/packages" class="btn btn-secondary-custom btn-lg px-4 py-3 rounded-pill" data-translate="learn_more">IICC Portal</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages-section" class="py-5 bg-section">
+        <div class="container my-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title fw-bold" data-translate="packages_heading">Our Umrah Packages</h2>
+                <div class="title-underline mx-auto"></div>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% set packages = frappe.get_all("Umrah Package", fields=["package_name", "makkah_hotel", "makkah_nights", "madinah_hotel", "madinah_nights", "price_sharing", "price_double", "price_triple", "price_quad"]) %}
+                {% for p in packages %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 package-card hover-lift">
+                        <div class="card-header-badge" data-translate="active_badge">Premium Package</div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="card-title fw-bold text-dark mb-3">{{ p.package_name }}</h3>
+                                <p class="card-subtitle text-muted mb-4">
+                                    <span class="badge bg-soft-primary px-3 py-2 rounded-pill">
+                                        <span class="nights-val">{{ p.makkah_nights }}</span> <span data-translate="nights_makkah">Nights Makkah</span> | 
+                                        <span class="nights-val">{{ p.madinah_nights }}</span> <span data-translate="nights_madinah">Nights Madinah</span>
+                                    </span>
+                                </p>
+                                
+                                <div class="hotel-details bg-soft-gray p-3 rounded-3 mb-4">
+                                    <h6 class="fw-bold text-secondary mb-2" data-translate="accommodations">Accommodations</h6>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span data-translate="makkah_hotel">🕋 Makkah Hotel:</span>
+                                        <span class="fw-semibold text-end">{{ p.makkah_hotel }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span data-translate="madinah_hotel">🕌 Madinah Hotel:</span>
+                                        <span class="fw-semibold text-end">{{ p.madinah_hotel }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <!-- Pricing Table -->
+                                <div class="pricing-grid bg-white p-3 rounded-3 shadow-2xs mb-4">
+                                    <div class="d-flex justify-content-between py-2 border-bottom">
+                                        <span class="text-muted" data-translate="price_sharing">Sharing Room</span>
+                                        <span class="fw-bold text-success price-value" data-sar="{{ p.price_sharing }}">{{ p.price_sharing }} SAR</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between py-2 border-bottom">
+                                        <span class="text-muted" data-translate="price_quad">Quad Room</span>
+                                        <span class="fw-bold text-success price-value" data-sar="{{ p.price_quad }}">{{ p.price_quad }} SAR</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between py-2 border-bottom">
+                                        <span class="text-muted" data-translate="price_triple">Triple Room</span>
+                                        <span class="fw-bold text-success price-value" data-sar="{{ p.price_triple }}">{{ p.price_triple }} SAR</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <span class="text-muted" data-translate="price_double">Double Room</span>
+                                        <span class="fw-bold text-success price-value" data-sar="{{ p.price_double }}">{{ p.price_double }} SAR</span>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary-custom w-100 py-3 rounded-pill fw-bold" data-translate="book_now">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Custom Page Styling -->
+<style>
+#umrah-portal {
+    background-color: var(--umrah-bg-body);
+    color: var(--umrah-text-main);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+/* RTL Adjustments */
+[dir="rtl"] #umrah-portal {
+    font-family: 'Noto Naskh Arabic', 'Outfit', sans-serif;
+}
+
+/* Hero styling */
+.portal-hero {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%), 
+                url('/private/files/4-1140x500.jpg') center/cover no-repeat;
+    min-height: 50vh;
+    color: white;
+}
+.hero-title {
+    background: linear-gradient(90deg, #ffffff 0%, #ffcbd1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn-primary-custom {
+    background-color: #ce1126;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+.btn-primary-custom:hover {
+    background-color: #a00d1e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(206, 17, 38, 0.3);
+}
+.btn-secondary-custom {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.btn-secondary-custom:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Section styling */
+.bg-section {
+    background-color: var(--umrah-bg-body);
+}
+.section-title {
+    color: var(--umrah-text-main);
+}
+.title-underline {
+    height: 4px;
+    width: 60px;
+    background-color: #ce1126;
+    border-radius: 2px;
+}
+
+/* Package Card premium UI */
+.package-card {
+    background-color: var(--umrah-bg-card) !important;
+    border: 1px solid var(--umrah-border-color) !important;
+    box-shadow: var(--umrah-card-shadow);
+    position: relative;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.package-card h3 {
+    color: var(--umrah-text-main) !important;
+}
+.card-header-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #ce1126;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+[dir="rtl"] .card-header-badge {
+    right: auto;
+    left: 15px;
+}
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+.bg-soft-primary {
+    background-color: rgba(206, 17, 38, 0.1);
+    color: #ce1126;
+}
+.bg-soft-gray {
+    background-color: rgba(108, 117, 125, 0.08);
+}
+.hotel-details span {
+    color: var(--umrah-text-muted);
+}
+.hotel-details .fw-semibold {
+    color: var(--umrah-text-main) !important;
+}
+.pricing-grid {
+    background-color: rgba(108, 117, 125, 0.04) !important;
+    border: 1px solid var(--umrah-border-color);
+}
+.pricing-grid .border-bottom {
+    border-bottom-color: var(--umrah-border-color) !important;
+}
+.pricing-grid span.text-muted {
+    color: var(--umrah-text-muted) !important;
+}
+</style>
+{% endblock %}

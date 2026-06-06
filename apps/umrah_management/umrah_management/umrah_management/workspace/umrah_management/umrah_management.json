@@ -1,0 +1,62 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"header-umrah\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Umrah Management</b></span>\",\"col\":12}},{\"id\":\"shortcut-booking\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Umrah Booking\",\"col\":3}},{\"id\":\"shortcut-pilgrim\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Umrah Pilgrim\",\"col\":3}},{\"id\":\"shortcut-package\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Umrah Package\",\"col\":3}},{\"id\":\"shortcut-group\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Umrah Group\",\"col\":3}}]",
+ "creation": "2026-05-24 09:40:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "folder",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Umrah Management",
+ "links": [],
+ "modified": "2026-05-24 09:40:00.000000",
+ "modified_by": "Administrator",
+ "module": "Umrah Management",
+ "name": "Umrah Management",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Umrah Booking",
+   "link_to": "Umrah Booking",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Umrah Pilgrim",
+   "link_to": "Umrah Pilgrim",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Umrah Package",
+   "link_to": "Umrah Package",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Umrah Group",
+   "link_to": "Umrah Group",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Umrah Management"
+}

@@ -1,0 +1,63 @@
+﻿# Virtual Environment
+env/
+.env
+
+# Logs
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node dependencies
+node_modules/
+
+# Site configurations and backups (Passwords/secrets)
+sites/**/site_config.json
+sites/**/site_config.json.bkp
+sites/common_site_config.json
+sites/assets/
+sites/*/private/
+sites/*/public/files/
+sites/*/public/backups/
+sites/*/locks/
+sites/**/*.db
+sites/**/*.duckdb
+sites/**/touched_tables.json
+
+# Standard Bench Apps
+apps/builder/
+apps/crm/
+apps/drive/
+apps/ecommerce_integrations/
+apps/erpnext/
+apps/erpnext_ksa/
+apps/frappe/
+apps/helpdesk/
+apps/hrms/
+apps/payments/
+apps/telephony/
+
+# Developer / IDE / Swp
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Temporary or test files
+test_write.txt
+
+# Archived folders
+archived/
+
+# PDFs and other large documents
+*.pdf
+
+# Database and site backups
+sites_config.json.bkp
+
+# Runtime directories and process IDs
+config/pids/
+config/scheduler_process
+sites/**/indexes/

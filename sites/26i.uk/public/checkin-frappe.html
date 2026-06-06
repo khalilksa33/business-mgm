@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Check-In - Insight-Nexus</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0%, 100% { background-color: #10b981; }
+            50% { background-color: #059669; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div class="max-w-md mx-auto mt-8 bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-200">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
+            <div class="flex items-center justify-center">
+                <i class="fas fa-clock text-2xl mr-3"></i>
+                <h1 class="text-xl font-bold">Employee Check-In</h1>
+            </div>
+            <p class="text-center text-blue-100 mt-2" id="user-info">Loading...</p>
+        </div>
+
+        <!-- Status Display -->
+        <div id="status" class="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-200">
+            <div class="text-center">
+                <div id="location-status" class="text-sm text-gray-600">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    Location services available
+                </div>
+                <div id="accuracy-display" class="text-xs text-gray-500 mt-2 hidden"></div>
+                <div class="mt-3">
+                    <button id="get-location-btn" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-full transition duration-200 shadow-sm">
+                        <i class="fas fa-crosshairs mr-1"></i>
+                        Get Location
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Check-In Form -->
+        <div class="p-6">
+            <div id="checkin-form">
+                <button id="checkin-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Check In
+                </button>
+            </div>
+
+            <div id="checkout-form" class="hidden">
+                <div class="bg-green-50 border border-green-300 rounded-xl p-4 mb-4 shadow-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-600 mr-3 text-lg"></i>
+                        <span class="text-green-700 font-semibold">Checked In</span>
+                    </div>
+                    <div id="checkin-time" class="text-sm text-green-600 mt-2 font-medium"></div>
+                </div>
+                <button id="checkout-btn" class="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Check Out
+                </button>
+            </div>
+
+            <!-- History -->
+            <div class="mt-8">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-history mr-2 text-blue-600"></i>
+                    Today's Activity
+                </h3>
+                <div id="history" class="space-y-3 max-h-96 overflow-y-auto">
+                    <p class="text-gray-500 text-sm text-center py-4">Loading activity...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-t border-gray-200">
+            <div class="text-center text-xs text-gray-600 space-y-1">
+                <div><i class="fas fa-shield-alt mr-1"></i> Secure Attendance Tracking</div>
+                <div><i class="fas fa-sync mr-1"></i> Auto-synced with ERP System</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app/frappe-web.min.js"></script>
+    <script src="checkin-frappe.js"></script>
+</body>
+</html>
