@@ -26,15 +26,15 @@ jobs:
           if [ ! -f "sites/common_site_config.json" ]; then
             echo "Creating common_site_config.json..."
             echo '{
-  "background_workers": 1,
-  "db_host": "127.0.0.1",
-  "db_port": 3306,
-  "redis_cache": "redis://127.0.0.1:13002",
-  "redis_queue": "redis://127.0.0.1:11002",
-  "redis_socketio": "redis://127.0.0.1:12002",
-  "webserver_port": 8000,
-  "socketio_port": 9001
-}' > sites/common_site_config.json
+              "background_workers": 1,
+              "db_host": "127.0.0.1",
+              "db_port": 3306,
+              "redis_cache": "redis://127.0.0.1:13002",
+              "redis_queue": "redis://127.0.0.1:11002",
+              "redis_socketio": "redis://127.0.0.1:12002",
+              "webserver_port": 8000,
+              "socketio_port": 9001
+            }' > sites/common_site_config.json
           fi
 
           # Check if site_config.json exists
