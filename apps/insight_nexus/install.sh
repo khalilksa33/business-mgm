@@ -5,7 +5,7 @@
 
 set -e
 
-BENCH_DIR="/home/frappe/frappe/umrah-mgmt"
+BENCH_DIR="/home/umrah-mgmt"
 SITE_NAME="26i.uk"
 APP_DIR="$BENCH_DIR/apps/insight_nexus"
 

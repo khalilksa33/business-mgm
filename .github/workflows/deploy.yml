@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Deploy Code & Migrate
         run: |
-          cd /home/frappe/frappe/umrah-mgmt
+          cd /home/umrah-mgmt
           git fetch origin main
           git reset --hard origin/main
           /home/frappe/.local/bin/bench --site 26i.uk migrate
