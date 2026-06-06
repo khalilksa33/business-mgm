@@ -5,44 +5,55 @@ on:
     branches:
       - main
 
+env:
+  BENCH_HOME: /home/iicc2/umrah-mgmt
+  BENCH_BIN: /home/iicc2/.local/bin/bench
+
 jobs:
   deploy:
     runs-on: self-hosted
     steps:
       - name: Deploy Code & Migrate
         run: |
-          if [ ! -d "/home/umrah-mgmt/.git" ]; then
+          # Ensure bench is on PATH for all commands in this step
+          export PATH="/home/iicc2/.local/bin:$HOME/.local/bin:$PATH"
+
+          if [ ! -d "$BENCH_HOME/.git" ]; then
             echo "Git repository not found. Initializing clone..."
-            git clone https://github.com/khalilksa33/umrah-mgmt /home/umrah-mgmt || (sudo rm -rf /home/umrah-mgmt && sudo mkdir -p /home/umrah-mgmt && sudo chown -R $(whoami):$(whoami) /home/umrah-mgmt && git clone https://github.com/khalilksa33/umrah-mgmt /home/umrah-mgmt)
+            git clone https://github.com/khalilksa33/umrah-mgmt "$BENCH_HOME" \
+              || (sudo rm -rf "$BENCH_HOME" \
+                  && sudo mkdir -p "$BENCH_HOME" \
+                  && sudo chown -R $(whoami):$(whoami) "$BENCH_HOME" \
+                  && git clone https://github.com/khalilksa33/umrah-mgmt "$BENCH_HOME")
           fi
-          cd /home/umrah-mgmt
+
+          cd "$BENCH_HOME"
           git fetch origin main
           git reset --hard origin/main
-          
-          # Add local bin to PATH
-          export PATH="$HOME/.local/bin:$PATH"
 
           # Write common_site_config.json if missing
           if [ ! -f "sites/common_site_config.json" ]; then
             echo "Creating common_site_config.json..."
-            echo '{
-              "background_workers": 1,
-              "db_host": "127.0.0.1",
-              "db_port": 3306,
-              "redis_cache": "redis://127.0.0.1:13002",
-              "redis_queue": "redis://127.0.0.1:11002",
-              "redis_socketio": "redis://127.0.0.1:12002",
-              "webserver_port": 8000,
-              "socketio_port": 9001
-            }' > sites/common_site_config.json
+            cat > sites/common_site_config.json <<'EOF'
+{
+  "background_workers": 1,
+  "db_host": "127.0.0.1",
+  "db_port": 3306,
+  "redis_cache": "redis://127.0.0.1:13002",
+  "redis_queue": "redis://127.0.0.1:11002",
+  "redis_socketio": "redis://127.0.0.1:12002",
+  "webserver_port": 8000,
+  "socketio_port": 9001
+}
+EOF
           fi
 
           # Check if site_config.json exists
           if [ ! -f "sites/26i.uk/site_config.json" ]; then
             echo "=== REQUIRED ACTION ==="
             echo "sites/26i.uk/site_config.json is missing."
-            echo "Please run the following command in your server's SSH terminal to initialize the site database:"
-            echo "  cd /home/umrah-mgmt"
+            echo "Please run the following commands in your server SSH terminal:"
+            echo "  cd $BENCH_HOME"
             echo "  bench new-site 26i.uk"
             echo "======================="
             exit 1
