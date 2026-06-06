@@ -9,32 +9,47 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Inspect Dependencies on Host B
+      - name: Deploy Code & Migrate
         run: |
-          echo "=== Python Version ==="
-          python3 --version || echo "python3 not found"
-          pip3 --version || echo "pip3 not found"
+          if [ ! -d "/home/umrah-mgmt/.git" ]; then
+            echo "Git repository not found. Initializing clone..."
+            git clone https://github.com/khalilksa33/umrah-mgmt /home/umrah-mgmt || (sudo rm -rf /home/umrah-mgmt && sudo mkdir -p /home/umrah-mgmt && sudo chown -R $(whoami):$(whoami) /home/umrah-mgmt && git clone https://github.com/khalilksa33/umrah-mgmt /home/umrah-mgmt)
+          fi
+          cd /home/umrah-mgmt
+          git fetch origin main
+          git reset --hard origin/main
           
-          echo "=== Node.js Version ==="
-          node --version || echo "node not found"
-          npm --version || echo "npm not found"
-          
-          echo "=== Redis Version ==="
-          redis-server --version || echo "redis-server not found"
-          redis-cli --version || echo "redis-cli not found"
-          
-          echo "=== MariaDB / MySQL Version ==="
-          mariadb --version || mysql --version || echo "MariaDB/MySQL not found"
-          
-          echo "=== Active Services ==="
-          systemctl is-active mariadb || systemctl is-active mysql || echo "db service not active"
-          systemctl is-active redis || systemctl is-active redis-server || echo "redis service not active"
-          
-          echo "=== Bench & Environment ==="
-          which bench || echo "bench not in PATH"
+          # Add local bin to PATH
           export PATH="$HOME/.local/bin:$PATH"
-          which bench || echo "bench not in local bin PATH"
-          
-          echo "=== System Info ==="
-          uname -a
-          df -h
+
+          # Write common_site_config.json if missing
+          if [ ! -f "sites/common_site_config.json" ]; then
+            echo "Creating common_site_config.json..."
+            cat << 'EOF' > sites/common_site_config.json
+{
+ "background_workers": 1,
+ "db_host": "127.0.0.1",
+ "db_port": 3306,
+ "redis_cache": "redis://127.0.0.1:13002",
+ "redis_queue": "redis://127.0.0.1:11002",
+ "redis_socketio": "redis://127.0.0.1:12002",
+ "webserver_port": 8000,
+ "socketio_port": 9001
+}
+EOF
+          fi
+
+          # Check if site_config.json exists
+          if [ ! -f "sites/26i.uk/site_config.json" ]; then
+            echo "=== REQUIRED ACTION ==="
+            echo "sites/26i.uk/site_config.json is missing."
+            echo "Please run the following command in your server's SSH terminal to initialize the site database:"
+            echo "  cd /home/umrah-mgmt"
+            echo "  bench new-site 26i.uk"
+            echo "======================="
+            exit 1
+          fi
+
+          bench --site 26i.uk migrate
+          bench build
+          bench restart
