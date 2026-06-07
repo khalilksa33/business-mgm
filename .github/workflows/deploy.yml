@@ -15,8 +15,8 @@ jobs:
     steps:
       - name: Deploy Code & Migrate
         run: |
-          # Ensure bench is on PATH for all commands in this step
-          export PATH="/home/iicc2/.local/bin:$HOME/.local/bin:$PATH"
+          # Ensure bench and nvm node are on PATH
+          export PATH="/home/iicc2/.nvm/versions/node/v20.20.2/bin:/home/iicc2/.local/bin:$HOME/.local/bin:$PATH"
 
           if [ ! -d "$BENCH_HOME/.git" ]; then
             echo "Git repository not found. Initializing clone..."
@@ -32,33 +32,45 @@ jobs:
           git reset --hard origin/main
 
           # Write common_site_config.json if missing
+          # Using python3 to avoid YAML-heredoc conflicts with JSON braces
           if [ ! -f "sites/common_site_config.json" ]; then
             echo "Creating common_site_config.json..."
-            cat > sites/common_site_config.json <<'EOF'
-{
-  "background_workers": 1,
-  "db_host": "localhost",
-  "db_port": 3306,
-  "redis_cache": "redis://127.0.0.1:13002",
-  "redis_queue": "redis://127.0.0.1:11002",
-  "redis_socketio": "redis://127.0.0.1:12002",
-  "webserver_port": 8000,
-  "socketio_port": 9001
+            python3 -c "
+import json, os
+config = {
+  'background_workers': 1,
+  'db_host': 'localhost',
+  'db_port': 3306,
+  'redis_cache': 'redis://127.0.0.1:13002',
+  'redis_queue': 'redis://127.0.0.1:11002',
+  'redis_socketio': 'redis://127.0.0.1:12002',
+  'webserver_port': 8000,
+  'socketio_port': 9001
 }
-EOF
+os.makedirs('sites', exist_ok=True)
+with open('sites/common_site_config.json', 'w') as f:
+    json.dump(config, f, indent=2)
+print('common_site_config.json written successfully.')
+"
           fi
 
-          # Check if site_config.json exists
+          # Check if site_config.json exists — site must be created manually first
           if [ ! -f "sites/26i.uk/site_config.json" ]; then
             echo "=== REQUIRED ACTION ==="
             echo "sites/26i.uk/site_config.json is missing."
             echo "Please run the following commands in your server SSH terminal:"
             echo "  cd $BENCH_HOME"
-            echo "  bench new-site 26i.uk"
+            echo "  ./setup_server.sh"
             echo "======================="
             exit 1
           fi
 
           bench --site 26i.uk migrate
+
+          # Build app-by-app to avoid OOM kill from building all at once
+          bench build --app frappe
+          bench build --app erpnext
+          bench build --app hrms
           bench build
+
           bench restart
