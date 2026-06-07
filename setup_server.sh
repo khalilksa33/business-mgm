@@ -60,10 +60,19 @@ else
 fi
 
 # 10. Create the site if it doesn't exist
-# Ensure common_site_config.json uses localhost for db_host to prevent connection mismatch
-if [ -f "sites/common_site_config.json" ]; then
-    sed -i 's/"db_host": "127.0.0.1"/"db_host": "localhost"/g' sites/common_site_config.json
-fi
+echo "Creating/overwriting common_site_config.json with correct Redis ports..."
+cat > sites/common_site_config.json <<'EOF'
+{
+  "background_workers": 1,
+  "db_host": "localhost",
+  "db_port": 3306,
+  "redis_cache": "redis://127.0.0.1:13002",
+  "redis_queue": "redis://127.0.0.1:11002",
+  "redis_socketio": "redis://127.0.0.1:12002",
+  "webserver_port": 8000,
+  "socketio_port": 9001
+}
+EOF
 
 if [ ! -f "sites/26i.uk/site_config.json" ]; then
     echo "Creating new site 26i.uk (You will be prompted for MariaDB root and Admin password)..."
