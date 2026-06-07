@@ -37,7 +37,7 @@ jobs:
             cat > sites/common_site_config.json <<'EOF'
 {
   "background_workers": 1,
-  "db_host": "127.0.0.1",
+  "db_host": "localhost",
   "db_port": 3306,
   "redis_cache": "redis://127.0.0.1:13002",
   "redis_queue": "redis://127.0.0.1:11002",

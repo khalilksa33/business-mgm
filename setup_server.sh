@@ -60,9 +60,14 @@ else
 fi
 
 # 10. Create the site if it doesn't exist
+# Ensure common_site_config.json uses localhost for db_host to prevent connection mismatch
+if [ -f "sites/common_site_config.json" ]; then
+    sed -i 's/"db_host": "127.0.0.1"/"db_host": "localhost"/g' sites/common_site_config.json
+fi
+
 if [ ! -f "sites/26i.uk/site_config.json" ]; then
     echo "Creating new site 26i.uk (You will be prompted for MariaDB root and Admin password)..."
-    bench new-site 26i.uk
+    bench new-site 26i.uk --force
 else
     echo "Site 26i.uk already exists."
 fi
