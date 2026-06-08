@@ -1,5 +1,5 @@
 [project]
-name = "umrah_management"
+name = "business_management"
 authors = [
     { name = "IICC", email = "dev@iicc.sa"}
 ]
@@ -21,7 +21,7 @@ build-backend = "flit_core.buildapi"
 
 [tool.ruff]
 line-length = 110
-target-version = "py310"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = [

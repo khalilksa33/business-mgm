@@ -1,4 +1,4 @@
-name: Deploy umrah-mgmt
+name: Deploy business-mgm
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  BENCH_HOME: /home/iicc2/umrah-mgmt
+  BENCH_HOME: /home/iicc2/business-mgm
   BENCH_BIN: /home/iicc2/.local/bin/bench
 
 jobs:

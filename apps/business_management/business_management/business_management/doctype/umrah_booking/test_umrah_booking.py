@@ -2,7 +2,7 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import today, add_days
 
-from umrah_management.umrah_management.doctype.umrah_booking.umrah_booking import create_sales_invoice
+from business_management.business_management.doctype.umrah_booking.umrah_booking import create_sales_invoice
 
 
 class TestUmrahBooking(FrappeTestCase):

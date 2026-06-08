@@ -1,7 +1,7 @@
-app_name = "umrah_management"
-app_title = "Umrah Management"
+app_name = "business_management"
+app_title = "Business Management"
 app_publisher = "IICC"
-app_description = "Umrah Business Management"
+app_description = "Business Management"
 app_email = "dev@iicc.sa"
 app_license = "mit"
 
@@ -13,11 +13,11 @@ app_license = "mit"
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "umrah_management",
-# 		"logo": "/assets/umrah_management/logo.png",
-# 		"title": "Umrah Management",
-# 		"route": "/umrah_management",
-# 		"has_permission": "umrah_management.api.permission.has_app_permission"
+# 		"name": "business_management",
+# 		"logo": "/assets/business_management/logo.png",
+# 		"title": "Business Management",
+# 		"route": "/business_management",
+# 		"has_permission": "business_management.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -25,15 +25,15 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/umrah_management/css/umrah_management.css"
-# app_include_js = "/assets/umrah_management/js/umrah_management.js"
+# app_include_css = "/assets/business_management/css/business_management.css"
+# app_include_js = "/assets/business_management/js/business_management.js"
 
 # include js, css files in header of web template
-web_include_css = "/assets/umrah_management/css/umrah_management.css"
-web_include_js = "/assets/umrah_management/js/umrah_management.js"
+web_include_css = "/assets/business_management/css/business_management.css"
+web_include_js = "/assets/business_management/js/business_management.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "umrah_management/public/scss/website"
+# website_theme_scss = "business_management/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -51,7 +51,7 @@ web_include_js = "/assets/umrah_management/js/umrah_management.js"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "umrah_management/public/icons.svg"
+# app_include_icons = "business_management/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -78,43 +78,43 @@ web_include_js = "/assets/umrah_management/js/umrah_management.js"
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "umrah_management.utils.jinja_methods",
-# 	"filters": "umrah_management.utils.jinja_filters"
+# 	"methods": "business_management.utils.jinja_methods",
+# 	"filters": "business_management.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "umrah_management.install.before_install"
-after_install = "umrah_management.umrah_management.setup.after_install"
+# before_install = "business_management.install.before_install"
+after_install = "business_management.business_management.setup.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "umrah_management.uninstall.before_uninstall"
-# after_uninstall = "umrah_management.uninstall.after_uninstall"
+# before_uninstall = "business_management.uninstall.before_uninstall"
+# after_uninstall = "business_management.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "umrah_management.utils.before_app_install"
-# after_app_install = "umrah_management.utils.after_app_install"
+# before_app_install = "business_management.utils.before_app_install"
+# after_app_install = "business_management.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "umrah_management.utils.before_app_uninstall"
-# after_app_uninstall = "umrah_management.utils.after_app_uninstall"
+# before_app_uninstall = "business_management.utils.before_app_uninstall"
+# after_app_uninstall = "business_management.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "umrah_management.notifications.get_notification_config"
+# notification_config = "business_management.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -145,47 +145,47 @@ after_install = "umrah_management.umrah_management.setup.after_install"
 
 # scheduler_events = {
 # 	"all": [
-# 		"umrah_management.tasks.all"
+# 		"business_management.tasks.all"
 # 	],
 # 	"daily": [
-# 		"umrah_management.tasks.daily"
+# 		"business_management.tasks.daily"
 # 	],
 # 	"hourly": [
-# 		"umrah_management.tasks.hourly"
+# 		"business_management.tasks.hourly"
 # 	],
 # 	"weekly": [
-# 		"umrah_management.tasks.weekly"
+# 		"business_management.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"umrah_management.tasks.monthly"
+# 		"business_management.tasks.monthly"
 # 	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "umrah_management.install.before_tests"
+# before_tests = "business_management.install.before_tests"
 
 # Extend DocType Class
 # ------------------------------
 #
 # Specify custom mixins to extend the standard doctype controller.
 # extend_doctype_class = {
-# 	"Task": "umrah_management.custom.task.CustomTaskMixin"
+# 	"Task": "business_management.custom.task.CustomTaskMixin"
 # }
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "umrah_management.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "business_management.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "umrah_management.task.get_dashboard_data"
+# 	"Task": "business_management.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -199,13 +199,13 @@ after_install = "umrah_management.umrah_management.setup.after_install"
 
 # Request Events
 # ----------------
-# before_request = ["umrah_management.utils.before_request"]
-# after_request = ["umrah_management.utils.after_request"]
+# before_request = ["business_management.utils.before_request"]
+# after_request = ["business_management.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["umrah_management.utils.before_job"]
-# after_job = ["umrah_management.utils.after_job"]
+# before_job = ["business_management.utils.before_job"]
+# after_job = ["business_management.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -235,7 +235,7 @@ after_install = "umrah_management.umrah_management.setup.after_install"
 # --------------------------------
 
 # auth_hooks = [
-# 	"umrah_management.auth.validate"
+# 	"business_management.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.
@@ -252,4 +252,3 @@ require_type_annotated_api_methods = True
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

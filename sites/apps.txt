@@ -10,5 +10,4 @@ drive
 erpnext_ksa
 telephony
 insight_nexus
-umrah_management
-
+business_management

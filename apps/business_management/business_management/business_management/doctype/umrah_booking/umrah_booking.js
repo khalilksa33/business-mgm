@@ -7,7 +7,7 @@ frappe.ui.form.on('Umrah Booking', {
                     __('Are you sure you want to create and submit a Sales Invoice for this booking?'),
                     function() {
                         frappe.call({
-                            method: 'umrah_management.umrah_management.doctype.umrah_booking.umrah_booking.create_sales_invoice',
+                            method: 'business_management.business_management.doctype.umrah_booking.umrah_booking.create_sales_invoice',
                             args: {
                                 booking_name: frm.doc.name
                             },

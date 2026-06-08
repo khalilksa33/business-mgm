@@ -12,7 +12,7 @@ npm install -g yarn || sudo npm install -g yarn
 
 # 2. Setup environment variables & paths
 export PATH="/home/iicc2/.nvm/versions/node/v20.20.2/bin:/home/iicc2/.local/bin:$PATH"
-cd /home/iicc2/umrah-mgmt
+cd /home/iicc2/business-mgm
 
 # 3. Ensure logs and config/pids directory exists
 mkdir -p logs config/pids
@@ -47,7 +47,7 @@ fi
 # 8. Install custom apps into virtual environment
 echo "Installing custom apps (insight_nexus, umrah_management) to python env..."
 ./env/bin/pip install -e apps/insight_nexus
-./env/bin/pip install -e apps/umrah_management
+./env/bin/pip install -e apps/business_management
 
 # 9. Ensure MariaDB is running
 echo "Checking MariaDB service status..."
@@ -94,7 +94,7 @@ bench --site 26i.uk install-app \
   erpnext_ksa \
   telephony \
   insight_nexus \
-  umrah_management
+  business_management
 
 # 12. Build assets — build app by app to catch and skip individual failures
 echo "Building bench assets..."
@@ -106,7 +106,7 @@ bench build
 
 # 13. Link supervisor and restart services
 echo "Configuring supervisor..."
-sudo ln -sf /home/iicc2/umrah-mgmt/config/supervisor.conf /etc/supervisor/conf.d/umrah-mgmt.conf
+sudo ln -sf /home/iicc2/business-mgm/config/supervisor.conf /etc/supervisor/conf.d/business-mgm.conf
 sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl restart all
