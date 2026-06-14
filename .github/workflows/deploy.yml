@@ -32,26 +32,21 @@ jobs:
           git reset --hard origin/main
 
           # Write common_site_config.json if missing
-          # Using python3 to avoid YAML-heredoc conflicts with JSON braces
           if [ ! -f "sites/common_site_config.json" ]; then
             echo "Creating common_site_config.json..."
-            python3 -c "
-import json, os
-config = {
-  'background_workers': 1,
-  'db_host': 'localhost',
-  'db_port': 3306,
-  'redis_cache': 'redis://127.0.0.1:13002',
-  'redis_queue': 'redis://127.0.0.1:11002',
-  'redis_socketio': 'redis://127.0.0.1:12002',
-  'webserver_port': 8000,
-  'socketio_port': 9001
-}
-os.makedirs('sites', exist_ok=True)
-with open('sites/common_site_config.json', 'w') as f:
-    json.dump(config, f, indent=2)
-print('common_site_config.json written successfully.')
-"
+            cat > sites/common_site_config.json <<'EOF'
+          {
+            "background_workers": 1,
+            "db_host": "localhost",
+            "db_port": 3306,
+            "redis_cache": "redis://127.0.0.1:13002",
+            "redis_queue": "redis://127.0.0.1:11002",
+            "redis_socketio": "redis://127.0.0.1:12002",
+            "webserver_port": 8000,
+            "socketio_port": 9001
+          }
+          EOF
+            echo "common_site_config.json created successfully."
           fi
 
           # Check if site_config.json exists — site must be created manually first
