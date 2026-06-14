@@ -13,7 +13,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Deploy Code & Migrate
+      - name: Deploy Code & Migrate (trigger test)
         run: |
           # Ensure bench and nvm node are on PATH
           export PATH="/home/iicc2/.nvm/versions/node/v20.20.2/bin:/home/iicc2/.local/bin:$HOME/.local/bin:$PATH"
